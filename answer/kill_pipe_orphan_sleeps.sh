@@ -55,8 +55,18 @@ filter_to_kill_process_ids (){
 }
 
 kill_processes (){
-    local PIDS="$@"
-    echo "${PIDS[@]}"
+    local PIDS=( "$@" )
+    if [ ${#PIDS[@]} -eq 0 ]; then
+        echo "No processes to kill."
+    else
+        echo "${#PIDS[@]} proceses to kill:"
+        for PID in ${PIDS[@]}; do
+            printf "Killing process $PID..."
+            kill $PID
+            printf " KILLED.\n"
+        done
+        echo "All done"
+    fi
 }
 
 SLEEP_PIDS=($(pidof sleep))
