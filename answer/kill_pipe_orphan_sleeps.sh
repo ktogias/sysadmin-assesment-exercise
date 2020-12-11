@@ -19,6 +19,9 @@ filter_to_kill_process_ids (){
     TO_KILL_PIDS=()
     for PID in ${ALL_PIDS[@]};
     do
+        local PIPE=$(readlink -f /proc/"$PID"/fd/1)
+        local PIPE_PART=$(echo $PIPE | sed 's/.*\(pipe:.*\)/\1/' )
+        local PIPE_PIDS=$((find /proc -type l | xargs ls -l | fgrep "$PIPE_PART") 2>/dev/null)
         TO_KILL_PIDS+=( $PID )
     done
 }
