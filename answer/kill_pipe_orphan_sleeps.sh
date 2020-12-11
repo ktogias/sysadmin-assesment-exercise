@@ -14,8 +14,19 @@ filter_infinity_sleep_process_ids () {
     done
 }
 
+filter_to_kill_process_ids (){
+    local ALL_PIDS="$@"
+    TO_KILL_PIDS=()
+    for PID in ${ALL_PIDS[@]};
+    do
+        TO_KILL_PIDS+=( $PID )
+    done
+}
+
 SLEEP_PIDS=($(pidof sleep))
 filter_infinity_sleep_process_ids "${SLEEP_PIDS[@]}"
+filter_to_kill_process_ids "${INFINITY_SLEEP_PIDS[@]}"
 
 echo ${SLEEP_PIDS[@]}
 echo ${INFINITY_SLEEP_PIDS[@]}
+echo ${TO_KILL_PIDS[@]}
