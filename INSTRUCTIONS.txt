@@ -1,0 +1,92 @@
+Test case / Run on Centos 6
+
+# cd to  directory containing the test files
+
+cd /root/test
+
+# run the script to create the test case
+
+./create_test.sh
+
+After that, the output of ps axfu will be similar to this :
+
+
+root     12997  0.0  0.0 107896   600 pts/0    S    18:19   0:00 sleep infinity
+root     12999  0.0  0.0 113120  1176 pts/0    S    18:19   0:00 /bin/bash ./runner3.sh
+root     13001  0.0  0.0 107896   604 pts/0    S    18:19   0:00  \_ sleep 100
+root     13002  0.0  0.0 107916   604 pts/0    S    18:19   0:00 cat -
+root     13004  0.0  0.0 107896   604 pts/0    S    18:19   0:00 sleep infinity
+root     13006  0.0  0.0 113120  1184 pts/0    S    18:19   0:00 /bin/bash ./runner3.sh
+root     13009  0.0  0.0 107896   608 pts/0    S    18:19   0:00  \_ sleep 100
+root     13008  0.0  0.0 107916   608 pts/0    S    18:19   0:00 cat -
+root     13011  0.0  0.0 107896   608 pts/0    S    18:19   0:00 sleep infinity
+root     13013  0.0  0.0 113120  1184 pts/0    S    18:19   0:00 /bin/bash ./runner3.sh
+root     13016  0.0  0.0 107896   604 pts/0    S    18:19   0:00  \_ sleep 100
+root     13015  0.0  0.0 107916   608 pts/0    S    18:19   0:00 cat -
+root     13018  0.0  0.0 107896   608 pts/0    S    18:19   0:00 sleep infinity
+root     13020  0.0  0.0 113120  1180 pts/0    S    18:19   0:00 /bin/bash ./runner3.sh
+root     13022  0.0  0.0 107896   608 pts/0    S    18:19   0:00  \_ sleep 100
+root     13024  0.0  0.0 107916   608 pts/0    S    18:19   0:00 cat -
+root     13025  0.0  0.0 107896   604 pts/0    S    18:19   0:00 sleep infinity
+root     13027  0.0  0.0 113120  1180 pts/0    S    18:19   0:00 /bin/bash ./runner3.sh
+root     13030  0.0  0.0 107896   608 pts/0    S    18:19   0:00  \_ sleep 100
+root     13029  0.0  0.0 107916   608 pts/0    S    18:19   0:00 cat -
+root     13032  0.0  0.0 107896   608 pts/0    S    18:19   0:00 sleep infinity
+root     13033  0.0  0.0 113120  1180 pts/0    S    18:19   0:00 /bin/bash ./runner.sh FAKESMS_START2514865077FAKESMS_END
+root     13036  0.0  0.0 107916   608 pts/0    S    18:19   0:00  \_ cat -
+root     13034  0.0  0.0 113120  1184 pts/0    S    18:19   0:00 /bin/bash ./runner3.sh
+root     13037  0.0  0.0 107896   608 pts/0    S    18:19   0:00  \_ sleep 100
+root     13039  0.0  0.0 107896   604 pts/0    S    18:19   0:00 sleep infinity
+root     13040  0.0  0.0 113120  1184 pts/0    S    18:19   0:00 /bin/bash ./runner.sh FAKESMS_START97559882111FAKESMS_END
+root     13043  0.0  0.0 107916   604 pts/0    S    18:19   0:00  \_ cat -
+root     13041  0.0  0.0 113120  1180 pts/0    S    18:19   0:00 /bin/bash ./runner3.sh
+root     13044  0.0  0.0 107896   608 pts/0    S    18:19   0:00  \_ sleep 100
+root     13046  0.0  0.0 107896   608 pts/0    S    18:19   0:00 sleep infinity
+root     13047  0.0  0.0 113120  1180 pts/0    S    18:19   0:00 /bin/bash ./runner.sh FAKESMS_START84022938188FAKESMS_END
+root     13050  0.0  0.0 107916   604 pts/0    S    18:19   0:00  \_ cat -
+root     13048  0.0  0.0 113120  1184 pts/0    S    18:19   0:00 /bin/bash ./runner3.sh
+root     13051  0.0  0.0 107896   604 pts/0    S    18:19   0:00  \_ sleep 100
+root     13053  0.0  0.0 107896   604 pts/0    S    18:19   0:00 sleep infinity
+root     13054  0.0  0.0 113120  1180 pts/0    S    18:19   0:00 /bin/bash ./runner.sh FAKESMS_START332031901FAKESMS_END
+root     13057  0.0  0.0 107916   608 pts/0    S    18:19   0:00  \_ cat -
+root     13055  0.0  0.0 113120  1176 pts/0    S    18:19   0:00 /bin/bash ./runner3.sh
+root     13058  0.0  0.0 107896   608 pts/0    S    18:19   0:00  \_ sleep 100
+root     13060  0.0  0.0 107896   604 pts/0    S    18:19   0:00 sleep infinity
+root     13061  0.0  0.0 113120  1184 pts/0    S    18:19   0:00 /bin/bash ./runner.sh FAKESMS_START7698665760FAKESMS_END
+root     13068  0.0  0.0 107916   608 pts/0    S    18:19   0:00  \_ cat -
+root     13062  0.0  0.0 113120  1180 pts/0    S    18:19   0:00 /bin/bash ./runner3.sh
+root     13069  0.0  0.0 107896   604 pts/0    S    18:19   0:00  \_ sleep 100
+
+
+PROBLEM description:
+
+The  ./start_service.sh  script starts a service called runner.sh which must run with a standard input attached to it at all times in order to function
+if you try to run it like ./runner.sh 12334 & it will enter a stoped state 
+if you run it like nohup ./runner.sh 12334 & it will exit since it needs an attached standard input.
+We emulate the stardard input to this script by using a sleep infinity and piping it to the script, this way the script has always a standard input available. 
+
+
+The problem occurs when the runner.sh terminates for various reasons (we simulate the termination by just killing the script)
+in this case the sleep infinity is not killed but continues to run. In the ps output above this is the case with proc numbers 12997 13004 13011 13018 13025
+Those are 'orphan' procs but are not zombies - nor real orphans from linux point of view. 
+The goal of this test is to find an automated way to detect and kill those procs but keeping intact the 
+legit "sleep infinity" procs ( ids 13032 13039 13046 13053 13060) If by mistake one of the legit "sleep inifity" procs is killed the corresponding runner.sh proc will loose 
+it's standard input and will terminate.  You can try this by killing manually one of them, you will notice that the corresponding runner.sh proc will be terminated as well
+Of course we want to avoid this at all costs.
+
+NOTE 1: for solving the problem you must not change the way that runner.sh works, this file and the sleep infinity login must not be changed.
+You can however change the start_service.sh script but leaving the logic in place.
+
+NOTE 2: We use "orphan" here very lossly because the proc is not really orphan from linux point of view.
+
+NOTE 3: the /bin/bash ./runner3.sh procs and child proc "sleep" are created for adding the real life complexity : the runner.sh procs are not created sequentally all together
+and other procs can be created in between them. Also the runner.sh proc that terminate are not nessesarly the older ones (in the example we killed the first 5 runner.sh proc)
+The solution mut take into account that the "orphan" "sleep infinity" procs can have ids that are between legit "sleep infinity" procs.
+
+
+
+DELIBERABLE:
+Create a script that when run will kill all "orphan" "sleep infinity" procs. 
+
+
+
