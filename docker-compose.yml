@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+    centos6-sysadmin-assesment:
+        build: .
+        image: centos6-sysadmin-assesment:latest
+        container_name: centos6-sysadmin-assesment
+        working_dir: /root
+        volumes:
+        - ./test:/root/test:Z
+        - ./answer:/root/answer:Z
